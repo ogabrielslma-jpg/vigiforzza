@@ -10,18 +10,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
+  /* DARK (preserva identidade cyberpunk) */
   --bg:        #060608;
   --surface:   #0c0c0f;
   --card:      #111115;
   --border:    rgba(255,255,255,0.06);
+
+  /* LIGHT (off-white premium) */
+  --bg-light:       #f5f5f5;
+  --surface-light:  #ffffff;
+  --card-light:     #ffffff;
+  --border-light:   rgba(0,0,0,0.08);
+  --text-dark:      #1a1a1a;
+  --text-mid:       #555555;
+  --text-light:     #888888;
+
+  /* RED */
   --red:       #E5192A;
   --red-dim:   #b01020;
   --red-glow:  rgba(229,25,42,0.25);
   --red-soft:  rgba(229,25,42,0.08);
+
+  /* NEUTRAL */
   --white:     #ffffff;
   --gray-1:    #f0f0f0;
   --gray-2:    #999999;
   --gray-3:    #444444;
+
   --ff-display: 'Bebas Neue', sans-serif;
   --ff-sub:     'Barlow Condensed', sans-serif;
   --ff-body:    'Barlow', sans-serif;
@@ -30,15 +45,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
-  background: var(--bg);
-  color: var(--gray-1);
+  background: var(--bg-light);
+  color: var(--text-dark);
   font-family: var(--ff-body);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* SCANLINES cyberpunk overlay */
+/* SCANLINES cyberpunk overlay - sutil para light/dark */
 body::before {
   content: '';
   position: fixed; inset: 0;
@@ -46,8 +61,8 @@ body::before {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0,0,0,0.07) 2px,
-    rgba(0,0,0,0.07) 4px
+    rgba(0,0,0,0.025) 2px,
+    rgba(0,0,0,0.025) 4px
   );
   pointer-events: none;
   z-index: 9998;
@@ -150,9 +165,9 @@ body::after {
 nav {
   position: fixed; top: 0; width: 100%; z-index: 1000;
   padding: 14px 0;
-  background: rgba(6,6,8,0.9);
+  background: rgba(245,245,245,0.92);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(229,25,42,0.2);
+  border-bottom: 1px solid rgba(229,25,42,0.18);
 }
 /* red top bar */
 nav::before {
@@ -165,7 +180,7 @@ nav::before {
 .logo {
   font-family: var(--ff-display);
   font-size: 1.7rem; letter-spacing: 2px;
-  color: var(--white); text-decoration: none;
+  color: var(--text-dark); text-decoration: none;
 }
 .logo em { color: var(--red); font-style: normal; }
 .nav-links { display: none; list-style: none; gap: 28px; }
@@ -173,24 +188,26 @@ nav::before {
 .nav-links a {
   font-family: var(--ff-sub); font-size: .82rem; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--gray-2); text-decoration: none; transition: color .2s;
+  color: var(--text-mid); text-decoration: none; transition: color .2s;
 }
 .nav-links a:hover { color: var(--red); }
 
-/* ---- HERO ---- */
+/* ---- HERO (LIGHT) ---- */
 .hero {
   min-height: 100svh;
   display: flex; align-items: center;
   padding: 110px 0 80px;
   position: relative; overflow: hidden;
+  background: var(--bg-light);
+  color: var(--text-dark);
 }
 
 /* background grid */
 .hero-grid {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(rgba(229,25,42,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(229,25,42,.04) 1px, transparent 1px);
+    linear-gradient(rgba(229,25,42,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229,25,42,.06) 1px, transparent 1px);
   background-size: 50px 50px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
 }
@@ -201,7 +218,7 @@ nav::before {
   position: absolute;
   top: -100px; right: -100px;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(229,25,42,.12) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(229,25,42,.10) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -210,7 +227,7 @@ nav::before {
 /* COUNTDOWN BADGE */
 .hero-urgent {
   display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(229,25,42,0.12);
+  background: rgba(229,25,42,0.10);
   border: 1px solid rgba(229,25,42,0.35);
   padding: 8px 18px; margin-bottom: 24px;
   font-family: var(--ff-sub); font-size: .78rem; font-weight: 700;
@@ -228,7 +245,7 @@ nav::before {
   font-size: clamp(4rem, 16vw, 10rem);
   line-height: .88;
   letter-spacing: 3px;
-  color: var(--white);
+  color: var(--text-dark);
   margin-bottom: 6px;
 }
 .hero h1 .red { color: var(--red); }
@@ -238,14 +255,14 @@ nav::before {
   font-size: clamp(1.4rem, 4vw, 2.4rem);
   font-weight: 600; letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gray-2);
+  color: var(--text-mid);
   margin-bottom: 28px;
   border-left: 3px solid var(--red);
   padding-left: 16px;
 }
 
 .hero-desc {
-  font-size: 1.05rem; color: var(--gray-2);
+  font-size: 1.05rem; color: var(--text-mid);
   max-width: 520px; margin-bottom: 38px; line-height: 1.75;
 }
 
@@ -258,13 +275,13 @@ nav::before {
 .hero-stats {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
   max-width: 560px;
-  background: rgba(229,25,42,.15);
-  border: 1px solid rgba(229,25,42,.2);
+  background: rgba(229,25,42,.18);
+  border: 1px solid rgba(229,25,42,.25);
 }
 @media (min-width: 560px) { .hero-stats { grid-template-columns: repeat(4, 1fr); } }
 
 .stat-box {
-  background: var(--card); padding: 18px 16px; text-align: center;
+  background: var(--card-light); padding: 18px 16px; text-align: center;
 }
 .stat-val {
   font-family: var(--ff-display);
@@ -276,7 +293,7 @@ nav::before {
   font-family: var(--ff-sub);
   font-size: .68rem; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  color: var(--gray-3); margin-top: 5px;
+  color: var(--text-light); margin-top: 5px;
 }
 
 /* ---- URGENCY STRIP ---- */
@@ -295,21 +312,25 @@ nav::before {
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 .strip-item::before { content: '◆'; margin-right: 20px; opacity: .6; }
 
-/* ---- BENEFITS ---- */
-.benefits { background: var(--surface); padding: 90px 0; }
+/* ---- BENEFITS (LIGHT) ---- */
+.benefits {
+  background: var(--bg-light);
+  padding: 90px 0;
+  color: var(--text-dark);
+}
 
 .benefits-grid {
   display: grid; gap: 1px;
-  background: rgba(229,25,42,.1);
+  background: rgba(229,25,42,.18);
   grid-template-columns: 1fr;
-  border: 1px solid rgba(229,25,42,.15);
+  border: 1px solid rgba(229,25,42,.2);
   margin-top: 52px;
 }
 @media (min-width: 560px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 900px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .b-card {
-  background: var(--card); padding: 36px 30px;
+  background: var(--card-light); padding: 36px 30px;
   position: relative; overflow: hidden;
   transition: background .3s;
 }
@@ -326,17 +347,21 @@ nav::before {
 .b-num {
   font-family: var(--ff-display);
   font-size: 3.5rem; letter-spacing: 1px;
-  color: rgba(229,25,42,.15); line-height: 1;
+  color: rgba(229,25,42,.20); line-height: 1;
   margin-bottom: 12px;
 }
 .b-title {
   font-family: var(--ff-sub); font-weight: 700; font-size: 1.05rem;
-  letter-spacing: .5px; color: var(--white); margin-bottom: 10px;
+  letter-spacing: .5px; color: var(--text-dark); margin-bottom: 10px;
 }
-.b-desc { font-size: .85rem; color: var(--gray-2); line-height: 1.65; }
+.b-desc { font-size: .85rem; color: var(--text-mid); line-height: 1.65; }
 
-/* ---- HOW IT WORKS ---- */
-.how { background: #ffffff; padding: 90px 0; }
+/* ---- HOW IT WORKS (DARK) ---- */
+.how {
+  background: var(--bg);
+  padding: 90px 0;
+  color: var(--gray-1);
+}
 
 .how-grid {
   display: grid; gap: 50px; margin-top: 56px;
@@ -408,8 +433,12 @@ nav::before {
 .cs-val { font-family: var(--ff-display); font-size: 1.8rem; color: var(--red); line-height: 1; }
 .cs-lbl { font-family: var(--ff-sub); font-size: .65rem; color: var(--gray-3); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-/* ---- TESTIMONIALS ---- */
-.testi { background: var(--surface); padding: 90px 0; }
+/* ---- TESTIMONIALS (LIGHT) ---- */
+.testi {
+  background: var(--bg-light);
+  padding: 90px 0;
+  color: var(--text-dark);
+}
 
 .testi-grid {
   display: grid; gap: 16px; margin-top: 52px;
@@ -419,24 +448,28 @@ nav::before {
 @media (min-width: 900px) { .testi-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .t-card {
-  background: var(--card); border: 1px solid var(--border);
+  background: var(--card-light); border: 1px solid var(--border-light);
   padding: 28px; position: relative; overflow: hidden;
-  transition: border-color .25s, transform .2s;
+  transition: border-color .25s, transform .2s, box-shadow .25s;
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
 }
-.t-card:hover { border-color: rgba(229,25,42,.3); transform: translateY(-4px); }
+.t-card:hover {
+  border-color: rgba(229,25,42,.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
 .t-stars { color: var(--red); font-size: .8rem; letter-spacing: 3px; margin-bottom: 12px; }
-.t-text { font-size: .86rem; color: var(--gray-1); line-height: 1.72; margin-bottom: 18px; flex: 1; }
-.t-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border); }
+.t-text { font-size: .86rem; color: var(--text-mid); line-height: 1.72; margin-bottom: 18px; flex: 1; }
+.t-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border-light); }
 .t-avatar {
   width: 38px; height: 38px; flex-shrink: 0;
-  background: rgba(229,25,42,.15); border: 1px solid rgba(229,25,42,.3);
+  background: rgba(229,25,42,.12); border: 1px solid rgba(229,25,42,.3);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--ff-sub); font-weight: 800; font-size: .78rem; color: var(--red);
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
 }
-.t-name { font-family: var(--ff-sub); font-weight: 700; font-size: .88rem; color: var(--white); }
-.t-role { font-size: .72rem; color: var(--gray-3); }
+.t-name { font-family: var(--ff-sub); font-weight: 700; font-size: .88rem; color: var(--text-dark); }
+.t-role { font-size: .72rem; color: var(--text-light); }
 
 /* ---- FAQ ---- */
 .faq { background: var(--bg); padding: 90px 0; }
@@ -478,16 +511,17 @@ nav::before {
 .faq-body-inner { overflow: hidden; }
 .faq-body-inner p { font-size: .85rem; color: var(--gray-2); line-height: 1.72; padding: 0 20px 18px; }
 
-/* ---- CTA ---- */
+/* ---- CTA (LIGHT) ---- */
 .cta {
-  background: var(--surface);
+  background: var(--bg-light);
   padding: 110px 0; text-align: center;
   position: relative; overflow: hidden;
+  color: var(--text-dark);
 }
 .cta::before {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(229,25,42,.08), transparent 65%);
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(229,25,42,.10), transparent 65%);
   pointer-events: none;
 }
 /* diagonal line decoration */
@@ -502,10 +536,10 @@ nav::before {
   font-family: var(--ff-display);
   font-size: clamp(2.8rem, 9vw, 5.5rem);
   letter-spacing: 3px; line-height: .92;
-  color: var(--white); margin-bottom: 20px;
+  color: var(--text-dark); margin-bottom: 20px;
 }
 .cta-inner h2 em { color: var(--red); font-style: normal; }
-.cta-sub { font-size: .92rem; color: var(--gray-2); margin-bottom: 36px; line-height: 1.75; }
+.cta-sub { font-size: .92rem; color: var(--text-mid); margin-bottom: 36px; line-height: 1.75; }
 
 /* ---- FOOTER ---- */
 footer {
@@ -544,10 +578,18 @@ footer::before {
   font-family: var(--ff-display);
   font-size: clamp(2.6rem, 7vw, 4.2rem);
   letter-spacing: 2px; line-height: 1;
-  color: var(--white); margin-bottom: 12px;
+  color: var(--text-dark); margin-bottom: 12px;
 }
 .sec-head h2 em { color: var(--red); font-style: normal; }
-.sec-head p { font-size: .92rem; color: var(--gray-2); max-width: 460px; line-height: 1.72; }
+.sec-head p { font-size: .92rem; color: var(--text-mid); max-width: 460px; line-height: 1.72; }
+
+/* Override em seções com fundo escuro */
+.cert-section .sec-head h2,
+.how .sec-head h2,
+.faq .sec-head h2 { color: var(--white); }
+.cert-section .sec-head p,
+.how .sec-head p,
+.faq .sec-head p { color: var(--gray-2); }
 
 /* ---- REVEAL ---- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
@@ -706,8 +748,9 @@ footer::before {
    SOCIAL PROOF SECTION
 ========================================================= */
 .social-section {
-    background: #ffffff;
+    background: var(--bg-light);
     padding: 80px 0 70px;
+    color: var(--text-dark);
 }
 .social-layout {
     display: flex;
@@ -765,8 +808,8 @@ footer::before {
     flex: 1;
 }
 .review-card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: var(--card-light);
+    border: 1px solid var(--border-light);
     padding: 22px 24px;
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
     position: relative;
@@ -794,13 +837,13 @@ footer::before {
 }
 .review-text {
     font-size: .9rem;
-    color: var(--gray-2);
+    color: var(--text-mid);
     line-height: 1.75;
     margin-bottom: 14px;
     padding-left: 6px;
 }
 .review-text em {
-    color: var(--white);
+    color: var(--text-dark);
     font-style: normal;
     font-weight: 600;
 }
@@ -813,7 +856,7 @@ footer::before {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: rgba(229,25,42,.15);
+    background: rgba(229,25,42,.12);
     border: 1.5px solid rgba(229,25,42,.3);
     display: flex;
     align-items: center;
@@ -828,12 +871,12 @@ footer::before {
     font-family: var(--ff-sub);
     font-weight: 700;
     font-size: .85rem;
-    color: var(--white);
+    color: var(--text-dark);
     letter-spacing: .5px;
 }
 .review-role {
     font-size: .75rem;
-    color: var(--gray-3);
+    color: var(--text-light);
     margin-top: 2px;
 }
 .review-cert-tag {
@@ -845,6 +888,180 @@ footer::before {
     border: 1px solid rgba(229,25,42,.3);
     padding: 3px 10px;
     text-transform: uppercase;
+}
+
+/* =========================================================
+   MOBILE OPTIMIZATION
+========================================================= */
+
+/* Tablet & Mobile (≤860px) */
+@media (max-width: 860px) {
+  .container { padding: 0 18px; }
+
+  /* NAV */
+  nav { padding: 10px 0; }
+  .logo { font-size: 1.4rem; letter-spacing: 1.5px; }
+
+  /* HERO */
+  .hero { padding: 90px 0 60px; min-height: auto; }
+  .hero h1 { font-size: clamp(3.2rem, 13vw, 6rem); letter-spacing: 1.5px; }
+  .hero-sub { font-size: clamp(1.1rem, 4vw, 1.6rem); padding-left: 12px; letter-spacing: 2px; }
+  .hero-desc { font-size: 1rem; margin-bottom: 28px; }
+  .hero-actions { margin-bottom: 36px; }
+  .hero::after { width: 400px; height: 400px; top: -50px; right: -150px; }
+
+  /* SEÇÕES — padding consistente */
+  .benefits, .how, .testi, .faq, .cta,
+  .cert-section, .social-section { padding: 60px 0; }
+
+  /* SEC-HEAD */
+  .sec-head h2 { font-size: clamp(2.2rem, 8vw, 3rem); letter-spacing: 1.5px; }
+  .sec-head p { font-size: .88rem; }
+
+  /* BENEFITS */
+  .b-card { padding: 28px 22px; }
+  .b-num { font-size: 2.8rem; }
+  .b-title { font-size: 1rem; }
+
+  /* CERTIFICADO */
+  .cert-card, .delivery-card { padding: 24px 20px; }
+  .cert-frame { transform: scale(0.95); transform-origin: top center; }
+
+  /* CTA */
+  .cta { padding: 80px 0; }
+  .cta-inner h2 { font-size: clamp(2.4rem, 10vw, 3.6rem); letter-spacing: 1.5px; }
+
+  /* SOCIAL */
+  .social-photo { width: 240px; height: 240px; }
+}
+
+/* Mobile pequeno (≤560px) */
+@media (max-width: 560px) {
+  .container { padding: 0 16px; }
+  .nav-inner { gap: 12px; }
+  .logo { font-size: 1.25rem; letter-spacing: 1px; }
+  .logo img { width: 28px !important; height: 28px !important; }
+
+  /* HERO compacto */
+  .hero { padding: 80px 0 50px; }
+  .hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); letter-spacing: 1px; }
+  .hero-urgent { font-size: .68rem; padding: 6px 14px; letter-spacing: 1.5px; }
+  .hero-sub { font-size: 1.05rem; letter-spacing: 1.5px; padding-left: 10px; }
+  .hero-desc { font-size: .95rem; line-height: 1.7; }
+
+  /* Botões touch-friendly (mínimo 48px de altura) */
+  .btn-red { padding: 14px 24px; font-size: .92rem; min-height: 48px; }
+  .btn-outline { padding: 13px 22px; font-size: .82rem; min-height: 46px; }
+  .hero-actions { flex-direction: column; gap: 10px; }
+  .btn-red, .btn-outline { width: 100%; }
+
+  /* Hero stats em 2 colunas */
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .stat-val { font-size: 1.5rem; }
+  .stat-lbl { font-size: .6rem; }
+  .stat-box { padding: 14px 10px; }
+
+  /* Seções menores */
+  .benefits, .how, .testi, .faq, .cta,
+  .cert-section, .social-section { padding: 50px 0; }
+
+  .sec-head h2 { font-size: 2rem; letter-spacing: 1px; }
+
+  /* Cards com padding reduzido */
+  .b-card { padding: 24px 18px; }
+  .b-num { font-size: 2.4rem; }
+
+  .step { gap: 14px; padding: 18px 0; }
+  .step-num { width: 36px; height: 36px; font-size: 1rem; }
+  .step-title { font-size: .9rem; }
+  .step-desc { font-size: .82rem; }
+
+  .t-card, .review-card { padding: 22px 18px; }
+  .t-text, .review-text { font-size: .85rem; }
+
+  /* FAQ touch-friendly */
+  .faq-q { padding: 16px; font-size: .88rem; min-height: 56px; }
+  .faq-icon { width: 24px; height: 24px; }
+  .faq-body-inner p { padding: 0 16px 16px; font-size: .82rem; }
+
+  /* CTA compacto */
+  .cta { padding: 70px 0; }
+  .cta-inner h2 { font-size: clamp(2.2rem, 11vw, 3rem); letter-spacing: 1px; }
+  .cta-sub { font-size: .9rem; }
+
+  /* Certificado preview menor */
+  .cert-frame { transform: scale(0.88); }
+  .cert-watermark { font-size: 2.2rem; letter-spacing: 5px; }
+  .cert-name { font-size: 1.4rem; }
+
+  /* Social photo */
+  .social-photo { width: 200px; height: 200px; }
+
+  /* WhatsApp float não tampar conteúdo */
+  .wa-float { width: 52px; height: 52px; bottom: 18px; right: 18px; }
+  .wa-float svg { width: 24px; height: 24px; }
+
+  /* Strip menor no mobile */
+  .strip { padding: 10px 0; }
+  .strip-inner { gap: 40px; font-size: .72rem; letter-spacing: 1.5px; }
+}
+
+/* Mobile extra-pequeno (≤380px) */
+@media (max-width: 380px) {
+  .hero h1 { font-size: 2.4rem; }
+  .sec-head h2 { font-size: 1.8rem; }
+  .cta-inner h2 { font-size: 2rem; }
+  .hero-stats { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   LOGO STYLES — Otimização visual da logo
+========================================================= */
+
+/* Logo no NAV */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1;
+}
+.logo img {
+  height: 36px;
+  width: auto;
+  max-width: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(229, 25, 42, 0.25));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.logo:hover img {
+  filter: drop-shadow(0 0 14px rgba(229, 25, 42, 0.5));
+  transform: scale(1.05);
+}
+
+/* Logo no certificado (preview) */
+.cert-logo-img {
+  height: 48px !important;
+  width: 48px !important;
+  object-fit: contain;
+}
+
+/* Selo do certificado */
+.cert-seal img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* Mobile — logo um pouco menor no menu */
+@media (max-width: 560px) {
+  .logo img {
+    height: 30px;
+    max-width: 30px;
+  }
+  .cert-logo-img {
+    height: 40px !important;
+    width: 40px !important;
+  }
 }
 
 </style>
@@ -968,19 +1185,19 @@ footer::before {
 </div>
 
 <style>
-/* === PROVA SOCIAL WHITE SECTION OVERRIDES === */
+/* === PROVA SOCIAL — OFF-WHITE SECTION OVERRIDES === */
 .social-section .review-card {
-    background: #f5f5f5 !important;
+    background: #ffffff !important;
     border: 1px solid rgba(0,0,0,0.08) !important;
 }
 .social-section .review-text {
-    color: #444444 !important;
+    color: #555555 !important;
 }
 .social-section .review-name {
-    color: #111111 !important;
+    color: #1a1a1a !important;
 }
 .social-section .review-role {
-    color: #666666 !important;
+    color: #888888 !important;
 }
 .social-section .review-stars span {
     color: #e5191a !important;
@@ -990,9 +1207,9 @@ footer::before {
     border-color: rgba(229,25,26,0.3) !important;
 }
 .social-section .social-badge {
-    background: rgba(229,25,26,0.08) !important;
+    background: rgba(229,25,26,0.10) !important;
     color: #e5191a !important;
-    border-color: rgba(229,25,26,0.4) !important;
+    border: 1px solid rgba(229,25,26,0.4) !important;
 }
 .social-section .review-avatar {
     background: #e5191a !important;
@@ -1204,18 +1421,18 @@ footer::before {
 </section>
 
 <style>
-/* === HOW IT WORKS WHITE SECTION OVERRIDES === */
-.how h2 { color: #111111; }
+/* === HOW IT WORKS — DARK SECTION OVERRIDES === */
+.how h2 { color: #ffffff; }
 .how h2 em { color: #e5191a; }
-.how .sec-head p { color: #555555; }
+.how .sec-head p { color: #999999; }
 .how .tag { color: #e5191a !important; border-color: rgba(229,25,26,0.3) !important; }
 .how .tag-dot { background: #e5191a !important; }
-.how .step { border-bottom-color: rgba(0,0,0,0.1); }
-.how .step-title { color: #111111; }
-.how .step-desc { color: #555555; }
+.how .step { border-bottom-color: rgba(255,255,255,0.08); }
+.how .step-title { color: #ffffff; }
+.how .step-desc { color: #999999; }
 .how .step-num { color: #e5191a; border-color: rgba(229,25,42,.4); }
 .how .step:hover .step-num { background: #e5191a; color: #fff; border-color: #e5191a; }
-.how .cert-card { background: #111111 !important; border-color: rgba(229,25,42,.3) !important; }
+.how .cert-card { background: #111115 !important; border-color: rgba(229,25,42,.3) !important; }
 .how .cert-title { color: #ffffff !important; }
 .how .cert-subtitle { color: rgba(255,255,255,0.6) !important; }
 .how .cert-list li { color: rgba(255,255,255,0.85) !important; border-bottom-color: rgba(255,255,255,0.08) !important; }
